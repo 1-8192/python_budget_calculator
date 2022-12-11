@@ -22,6 +22,8 @@ def main():
         budget = Budget(float(income))
         print("Your income is: ", budget.income)
         print("Your budget target is: ", budget.budget_map)
+        budget.calculate_budget()
+        print("Your calculated budget is: ", budget.calculated_budget_map)
 
 
 def income_is_valid(income: str) -> bool:
