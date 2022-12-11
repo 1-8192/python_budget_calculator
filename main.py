@@ -5,8 +5,9 @@ Author: Alessandro Allegranzi
 from budget import Budget
 
 def main():
-    test = Budget()
-    print(test.test)
+    income  = input('Please enter your monthly income: ')
+    budget = Budget(float(income))
+    print("Your income is: ", budget.income)
 
 if __name__ == '__main__':
     main()
