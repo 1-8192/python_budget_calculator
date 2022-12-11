@@ -2,7 +2,6 @@
 Name: Python Budget Calculator
 Author: Alessandro Allegranzi
 """
-import numbers
 from budget import Budget
 
 def main():
@@ -22,8 +21,7 @@ def main():
         budget = Budget(float(income))
         print("Your income is: ", budget.income)
         print("Your budget target is: ", budget.budget_map)
-        budget.calculate_budget()
-        print("Your calculated budget is: ", budget.calculated_budget_map)
+        print("Your calculated budget is: ", budget)
 
 
 def income_is_valid(income: str) -> bool:
@@ -40,6 +38,10 @@ def yes_or_no_valid(selection: str) -> bool:
         return True
     else:
         return False
+
+def print_csv():
+    """Prints budget into a CSV file"""
+    pass
 
 if __name__ == '__main__':
     main()
