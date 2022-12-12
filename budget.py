@@ -49,7 +49,14 @@ class Budget(object):
         Return:
             list with 2 elements, each a row to be saved to a CSV file
         """
-        pass
+        csv_first_row = []
+        csv_second_row = []
+        for i in self.calculated_budget_map.keys():
+            csv_first_row.append(i)
+            csv_second_row.append(self.calculated_budget_map[i])
+        
+        return [csv_first_row, csv_second_row]
+        
 
     def __repr__(self) -> str:
         """

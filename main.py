@@ -50,9 +50,11 @@ def yes_or_no_valid(selection: str) -> bool:
 
 def print_csv(budget: Budget, file_name: str) -> None:
     """Prints budget into a CSV file"""
-    file = open(file_name, 'w')
+    file = open(file_name + '.csv', 'w')
+    content = budget.format_for_csv()
     writer = csv.writer(file)
-    # writer.writerow([budget.calculated_budget_map])
+    writer.writerow(content[0])
+    writer.writerow(content[1])
     file.close()
 
 if __name__ == '__main__':
