@@ -39,7 +39,7 @@ class Budget(object):
         for i in self.budget_map.keys():
             self.calculated_budget_map[i] = self.budget_map[i] / 100 * self.income
     
-    def format_for_csv(self) -> list:
+    def format_for_csv(self) -> tuple:
         """
         returns a list ready to be saved into a CSV file with budget information
   
@@ -47,7 +47,7 @@ class Budget(object):
            self (Budget): class instance
         
         Return:
-            list with 2 elements, each a row to be saved to a CSV file
+            tuple with 2 elements, each a row to be saved to a CSV file
         """
         csv_first_row = []
         csv_second_row = []
@@ -55,7 +55,7 @@ class Budget(object):
             csv_first_row.append(i)
             csv_second_row.append(self.calculated_budget_map[i])
         
-        return [csv_first_row, csv_second_row]
+        return (csv_first_row, csv_second_row)
         
 
     def __repr__(self) -> str:
@@ -69,7 +69,7 @@ class Budget(object):
             string
         """
         category_list = list(self.budget_map.keys())
-        return "Budget: \n" + "{:<2}  {:<2}  {:<2}\n".format(category_list[0], category_list[1], category_list[2]) + "{:,2}  {:,2}  {:,2}\n".format(self.calculated_budget_map['necessities'], self.calculated_budget_map['savings'], self.calculated_budget_map['discretionary'])
+        return "Budget: \n" + "{:<2}  {:<2}  {:<2}\n".format(category_list[0], category_list[1], category_list[2]) + "{0:,.2f}  {0:,.2f}  {0:,.2f}\n".format(self.calculated_budget_map['necessities'], self.calculated_budget_map['savings'], self.calculated_budget_map['discretionary'])
 
     def __str__(self):
         """
@@ -83,7 +83,7 @@ class Budget(object):
         """
         category_list = list(self.budget_map.keys())
         print(category_list)
-        return "Budget: \n" + "{:<2}  {:<2}  {:<2}\n".format(category_list[0], category_list[1], category_list[2]) + "{:<2}  {:<2}  {:<2}\n".format(self.calculated_budget_map['necessities'], self.calculated_budget_map['savings'], self.calculated_budget_map['discretionary'])
+        return "Budget: \n" + "{:<2}  {:<2}  {:<2}\n".format(category_list[0], category_list[1], category_list[2]) + "{0:,.2f}  {0:,.2f}  {0:,.2f}\n".format(self.calculated_budget_map['necessities'], self.calculated_budget_map['savings'], self.calculated_budget_map['discretionary'])
 
 if __name__ == '__main__':
     pass
