@@ -3,6 +3,8 @@ Name: Python Budget Calculator
 Author: Alessandro Allegranzi
 """
 from budget import Budget
+import csv
+import sys
 
 def main():
     """Main function running the logic of the terminal application"""
@@ -22,6 +24,13 @@ def main():
         print("Your income is: ", budget.income)
         print("Your budget target is: ", budget.budget_map)
         print("Your calculated budget is: ", budget)
+    
+    csv_file_name = input("Please enter desired name for CSV file: ")
+    print_csv(budget, csv_file_name)
+
+    sys.exit()
+
+
 
 
 def income_is_valid(income: str) -> bool:
@@ -39,9 +48,12 @@ def yes_or_no_valid(selection: str) -> bool:
     else:
         return False
 
-def print_csv():
+def print_csv(budget: Budget, file_name: str) -> None:
     """Prints budget into a CSV file"""
-    pass
+    file = open(file_name, 'w')
+    writer = csv.writer(file)
+    # writer.writerow([budget.calculated_budget_map])
+    file.close()
 
 if __name__ == '__main__':
     main()

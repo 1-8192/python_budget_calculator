@@ -38,6 +38,18 @@ class Budget(object):
         """
         for i in self.budget_map.keys():
             self.calculated_budget_map[i] = self.budget_map[i] / 100 * self.income
+    
+    def format_for_csv(self) -> list:
+        """
+        returns a list ready to be saved into a CSV file with budget information
+  
+        Parameters:
+           self (Budget): class instance
+        
+        Return:
+            list with 2 elements, each a row to be saved to a CSV file
+        """
+        pass
 
     def __repr__(self) -> str:
         """
