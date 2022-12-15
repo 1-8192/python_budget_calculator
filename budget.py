@@ -34,11 +34,11 @@ class Budget(object):
         self.income = income
         self.budget_map = budget_map
         self.calculated_budget_map = {}
-        self.calculate_budget()
+        self.__calculate_budget()
     
-    def calculate_budget(self) -> None:
+    def __calculate_budget(self) -> None:
         """
-        Calcualtes actual totals for monthly budgets based on preset percentages
+        Calculates actual totals for monthly budgets based on preset percentages
   
         Parameters:
            self (Budget): class instance
@@ -68,7 +68,18 @@ class Budget(object):
             csv_third_row.append(self.calculated_budget_map[i])
         
         return (csv_first_row, csv_second_row, csv_third_row, csv_fourth_row)
+    
+    def evaluate_budget(self) -> str:
+        """
+        returns a string summary of recommendations based on budget plan.
+  
+        Parameters:
+           self (Budget): class instance
         
+        Return:
+            string
+        """
+        pass
 
     def __repr__(self) -> str:
         """
@@ -99,4 +110,4 @@ class Budget(object):
             )
 
 if __name__ == '__main__':
-    pass
+    """ Unit testing some class methods below"""

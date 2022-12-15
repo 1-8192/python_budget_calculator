@@ -25,10 +25,16 @@ def print_csv(budget: Budget, file_name: str) -> None:
     """Prints budget into a CSV file"""
     file = open(file_name + '.csv', 'w')
     content = budget.format_for_csv()
-    writer = csv.writer(file)
-    for i in range(len(content)):
-        writer.writerow(content[i])
-    file.close()
+    try:
+        writer = csv.writer(file)
+        for i in range(len(content)):
+            writer.writerow(content[i])
+    except:
+        print("We're sorry, something went wrong creating the CSV file.")
+    else:
+        print("We were not able to print the CSV file.")
+    finally:
+        file.close()
 
 def confirm_category_percentages() -> dict:
     """Confirms percentages user wants for budget categories"""
