@@ -4,6 +4,8 @@ Utility functions for the Python Budget Calculator
 from budget import Budget
 import csv
 
+FULL_PERCENTAGE = 100
+
 def is_valid_as_float(income: str) -> bool:
     """Validating user provided income"""
 
@@ -41,7 +43,7 @@ def confirm_category_percentages() -> dict:
     budget_map_dict = {}
 
     # Wrapping values() method in list since it returns a view.
-    while sum(list(budget_map_dict.values())) != 100:
+    while sum(list(budget_map_dict.values())) != FULL_PERCENTAGE:
         print("Please make sure you enter values that add to 100%")
         for i in Budget.budget_categories:
             percent = input('Please enter the percetange of income you would like to spend on ' + i + ': ')

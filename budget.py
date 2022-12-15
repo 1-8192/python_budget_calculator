@@ -38,7 +38,7 @@ class Budget(object):
     
     def __calculate_budget(self) -> None:
         """
-        Calculates actual totals for monthly budgets based on preset percentages
+        Calculates actual totals for monthly budgets based on preset percentages. Private method called upon initialization
   
         Parameters:
            self (Budget): class instance
@@ -57,7 +57,7 @@ class Budget(object):
            self (Budget): class instance
         
         Return:
-            tuple with 2 elements, each a row to be saved to a CSV file
+            tuple with 4 elements, each a row to be saved to a CSV file
         """
         csv_first_row = ["Your budget"]
         csv_second_row = []
@@ -69,17 +69,31 @@ class Budget(object):
         
         return (csv_first_row, csv_second_row, csv_third_row, csv_fourth_row)
     
-    def evaluate_budget(self) -> str:
+    def evaluate_budget(self) -> set:
         """
-        returns a string summary of recommendations based on budget plan.
+        returns a set of strings with recommendations based on budget plan.
   
         Parameters:
            self (Budget): class instance
         
         Return:
-            string
+            set of str
         """
-        pass
+        advice_set = set()
+        
+        if self.budget_map[Budget.budget_categories[1]] >= 20 and self.budget_map[Budget.budget_categories[2]] <= 30:
+            advice_set.add("Your overall budget looks pretty good.")
+        if self.budget_map[Budget.budget_categories[1]] < 20:
+            advice_set.add("You may want to consider setting aside a larger portion of your income to savings.")
+        if self.budget_map[Budget.budget_categories[2]] > 30:
+            advice_set.add("You may want to consider spending less each month on non-essential things.")
+        if self.budget_map[Budget.budget_categories[0]] > 50:
+            advice_set.add("Your monthly costs for rent/utilities etc. may be slightly high for your income level. Consider downsizing.")
+        
+        if len(advice_set) == 0:
+            advice_set.add("We aren't really able to advise you, sorry.")
+        
+        return advice_set
 
     def __repr__(self) -> str:
         """

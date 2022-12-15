@@ -10,9 +10,6 @@ from budget import Budget
 from budget_utilities import is_valid_as_float, yes_or_no_valid, print_csv, confirm_category_percentages
 import sys
 
-
-FULL_PERCENTAGE = 100
-
 def main():
     """
     Main function running the logic of the terminal application using the Budget class and utility
@@ -37,6 +34,14 @@ def main():
     
     print("Here is your budget plan")
     print(budget)
+
+    evaluate_budget_bool = input("Would you like us to evaluate your budget? Please bear in mind we are not liensed fiancial planners, this is very general advice [y/n]: ")
+
+    while not yes_or_no_valid(evaluate_budget_bool):
+        evaluate_budget_bool= input("[y/n]?: ")
+    
+    if evaluate_budget_bool == "y":
+        print(" ".join(budget.evaluate_budget()))
 
     print_csv_bool = input("Would you like generate a CSV file of your budget?[y/n]: ")
 
