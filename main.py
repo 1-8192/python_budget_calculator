@@ -26,7 +26,9 @@ if __name__ == '__main__':
         income = input('There was a problem validating your income, please try again: ')
 
     # Here we are confirming if the user would like specific budget percentages for our splits
-    standard_budget = input("Would you like to use a standard 50/30/20 budget?[y/n]: ")
+    standard_budget = input(
+        "Would you like to use a standard 50/30/20 (necessities/discretionary/savings) budget?[y/n]: "
+        )
 
     while not yes_or_no_valid(standard_budget):
         standard_budget = input("[y/n]?: ")
@@ -52,7 +54,9 @@ if __name__ == '__main__':
         print(" ".join(budget.evaluate_budget()))
 
     # Giving the option to reallocate budget cateogires if the user desires 
-    recalculate_budget = input("Would you like re-allocate percentages to your budget categories?[y/n]: ")
+    recalculate_budget = input(
+        "Are you happy with your budget, or would you like re-allocate percentages to your budget categories?[y/n]: "
+        )
 
     while not yes_or_no_valid(recalculate_budget):
         recalculate_budget = input("[y/n]?: ")
