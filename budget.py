@@ -47,7 +47,7 @@ class Budget(object):
             None
         """
         for i in self.budget_map.keys():
-            self.calculated_budget_map[i] = (self.budget_map[i] / 100) * self.income
+            self.calculated_budget_map[i] = round((self.budget_map[i] / 100) * self.income, 2)
     
     def format_for_csv(self) -> tuple:
         """
@@ -60,9 +60,9 @@ class Budget(object):
             tuple with 4 elements, each a row to be saved to a CSV file
         """
         csv_first_row = ["Your budget"]
-        csv_second_row = []
-        csv_third_row = []
-        csv_fourth_row =["Total income", self.income]
+        csv_second_row = ["category:"]
+        csv_third_row = ["monthly amounts:"]
+        csv_fourth_row =["Total income:", self.income]
         for i in self.calculated_budget_map.keys():
             csv_second_row.append(i)
             csv_third_row.append(self.calculated_budget_map[i])
@@ -118,10 +118,30 @@ class Budget(object):
         Return:
             string
         """
-        return "Budget: \n" + "{:<2}  {:<2}  {:<2}\n".format(Budget.budget_categories[0], Budget.budget_categories[1], Budget.budget_categories[2]) + "{:,.2f}       {:,.2f}   {:,.2f}\n".format(
-            self.calculated_budget_map[Budget.budget_categories[0]], self.calculated_budget_map[Budget.budget_categories[1]], self.calculated_budget_map[Budget.budget_categories[2]]) + "Total Income: {:,.2f}".format(
-            self.income  
-            )
+        return "Budget: \n" + "{:<2}     {:<2}     {:<2}\n".format(Budget.budget_categories[0], 
+        Budget.budget_categories[1], 
+        Budget.budget_categories[2]
+        ) + "{:,.2f}          {:,.2f}        {:,.2f}\n".format(
+            self.calculated_budget_map[Budget.budget_categories[0]], 
+            self.calculated_budget_map[Budget.budget_categories[1]], 
+            self.calculated_budget_map[Budget.budget_categories[2]]
+            ) + "Total Income: {:,.2f}".format(self.income)
+    
+    def __eq__(self, other) -> bool:
+        """
+        == overwrite for the budget class so we can define how to compare instances.
+  
+        Parameters:
+           self (Budget): class instance
+           other (Budget): class instance
+        
+        Return:
+            bool
+        """
+        if type(other) != Budget:
+            return False
+        if self.income == other.income and self.budget_map == other.budget_map and self.calculated_budget_map == other.calculated_budget_map:
+            return True
 
 if __name__ == '__main__':
     """ Unit testing some class methods below"""
@@ -182,3 +202,12 @@ if __name__ == '__main__':
         "Your monthly costs for rent/utilities etc. may be slightly high for your income level. Consider downsizing."
         }
     assert expected_set == evaluated_budget, "Did not get expcted advice, got: {}".format(evaluated_budget)
+
+    """Testing the equals overwrite we implemented above"""
+    budget_1 = Budget(100)
+    budget_2 = Budget(100)
+    budget_3 = Budget(500)
+    something_else = "not a budget"
+    assert budget_1 == budget_2
+    assert budget_1 != budget_3
+    assert budget_1 != something_else
