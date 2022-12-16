@@ -11,9 +11,9 @@ from budget import Budget
 from budget_utilities import is_valid_as_float, yes_or_no_valid, print_csv, confirm_category_percentages, WELCOME_MESSAGE
 import sys
 
-def main():
+if __name__ == '__main__':
     """
-    Main function running the logic of the terminal application using the Budget class and utility
+    Main logic flow of the terminal application using the Budget class and utility
     function defined in budget_utilities
     """
     
@@ -21,10 +21,11 @@ def main():
     print(WELCOME_MESSAGE)
     income = input('Please enter your monthly income: ')
     
+    # Validating user provided income
     while not is_valid_as_float(income):
         income = input('There was a problem validating your income, please try again: ')
 
-    # Here we are confirming if he user would like specific budget percentages for our splits
+    # Here we are confirming if the user would like specific budget percentages for our splits
     standard_budget = input("Would you like to use a standard 50/30/20 budget?[y/n]: ")
 
     while not yes_or_no_valid(standard_budget):
@@ -40,7 +41,7 @@ def main():
     print("Here is your budget plan")
     print(budget)
 
-    # As a little bit of fun, if the user wants we can look over their budget and offer very general, safe
+    # As a little bit of fun, if the user wants, we can look over their budget and offer very general, safe
     # advice for improvement, like trying to save more. 
     evaluate_budget_bool = input("Would you like us to evaluate your budget? Please bear in mind we are not liensed fiancial planners, this is very general advice [y/n]: ")
 
@@ -75,6 +76,3 @@ def main():
     # Exiting the App
     print("Thank you for using the Python Budget Calculator")
     sys.exit()
-
-if __name__ == '__main__':
-    main()
