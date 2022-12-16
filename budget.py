@@ -125,3 +125,60 @@ class Budget(object):
 
 if __name__ == '__main__':
     """ Unit testing some class methods below"""
+
+    """Testing that calculate_budget() work correctly on initialization """
+    # Case 1 = using default budget plan
+    expected_budget_map = {
+        Budget.budget_categories[0]: 500.0,
+        Budget.budget_categories[1]: 200.0,
+        Budget.budget_categories[2]: 300.0,
+        }
+    budget = Budget(1000)
+    assert expected_budget_map == budget.calculated_budget_map, "Did not generate expected budget breakdown, got: {}".format(budget.calculated_budget_map)
+
+    # Case 2 = using custom budget plan percentages
+    budget_map = {
+        Budget.budget_categories[0]: 15,
+        Budget.budget_categories[1]: 30,
+        Budget.budget_categories[2]: 65,
+    }
+    expected_budget_map = {
+        Budget.budget_categories[0]: 150.0,
+        Budget.budget_categories[1]: 300.0,
+        Budget.budget_categories[2]: 650.0,
+        }
+    budget = Budget(1000, budget_map)
+    assert expected_budget_map == budget.calculated_budget_map, "Did not generate expected budget breakdown, got: {}".format(budget.calculated_budget_map)
+
+    """Testing the format_for_csv() method"""
+    budget = Budget(1000)
+    csv_tuple = budget.format_for_csv()
+    expected_tuple = (
+        ["Your budget"],
+        ["necessities", "savings", "discretionary"],
+        [500.0, 200.0, 300.0],
+        ["Total income", 1000]
+    )
+    assert expected_tuple == csv_tuple, "Did not get expcted csv rows, got: {}".format(csv_tuple)
+
+    """Testing the evaluate_budget() method"""
+    # Case 1 = using default budget percentages
+    budget = Budget(1000)
+    evaluated_budget = budget.evaluate_budget()
+    expected_set = {"Your overall budget looks pretty good."}
+    assert expected_set == evaluated_budget, "Did not get expcted advice, got: {}".format(evaluated_budget)
+
+    # Case 2 = using different percentages
+    budget_map = {
+        Budget.budget_categories[0]: 60,
+        Budget.budget_categories[1]: 5,
+        Budget.budget_categories[2]: 35,
+    }
+    budget = Budget(1000, budget_map)
+    evaluated_budget = budget.evaluate_budget()
+    expected_set = {
+        "You may want to consider setting aside a larger portion of your income to savings.",
+        "You may want to consider spending less each month on non-essential things.",
+        "Your monthly costs for rent/utilities etc. may be slightly high for your income level. Consider downsizing."
+        }
+    assert expected_set == evaluated_budget, "Did not get expcted advice, got: {}".format(evaluated_budget)
