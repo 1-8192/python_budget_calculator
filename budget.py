@@ -116,7 +116,9 @@ class Budget(object):
         if self.budget_map[Budget.budget_categories[2]] > 30:
             advice_set.add("You may want to consider spending less each month on non-essential things.")
         if self.budget_map[Budget.budget_categories[0]] > 50:
-            advice_set.add("Your monthly costs for rent/utilities etc. may be slightly high for your income level. Consider downsizing.")
+            advice_set.add(
+                "Your monthly costs for rent/utilities etc. may be slightly high for your income level. Consider downsizing if at all possible."
+                )
         
         if len(advice_set) == 0:
             advice_set.add("We aren't really able to advise you, sorry.")
