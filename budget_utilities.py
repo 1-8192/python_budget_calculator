@@ -34,7 +34,7 @@ def print_csv(budget: Budget, file_name: str) -> None:
     except:
         print("We're sorry, something went wrong creating the CSV file.")
     else:
-        print("We were not able to print the CSV file.")
+        print("We printed your results to a CSV file.")
     finally:
         file.close()
 
