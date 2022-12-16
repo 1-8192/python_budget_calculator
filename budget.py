@@ -33,13 +33,19 @@ class Budget(object):
            budget_map (dict):  A map of budget category to percentage of total budget.
 
         """
-        self.income = income
+        # Attributes
+        # Private
+        self.__income = income
+        # Public
         self.budget_map = budget_map
         self.calculated_budget_map = {}
+
+        # Calling the private calculate budget method to calculate the budget
         self.__calculate_budget()
     
     def __calculate_budget(self) -> None:
         """
+        Private
         Calculates actual totals for monthly budgets based on preset percentages. Private method called upon initialization
   
         Parameters:
@@ -49,7 +55,21 @@ class Budget(object):
             None
         """
         for i in self.budget_map.keys():
-            self.calculated_budget_map[i] = round((self.budget_map[i] / 100) * self.income, 2)
+            self.calculated_budget_map[i] = round((self.budget_map[i] / 100) * self.__income, 2)
+    
+    def amend_budget_calculations(self, budget_map: dict) -> None:
+        """
+        Amends budget calculations based on passed in budget_map.
+  
+        Parameters:
+           self (Budget): class instance
+           budget_map (dict): budget map with new desired percentages
+        
+        Return:
+            None
+        """
+        self.budget_map = budget_map
+        self.__calculate_budget()
     
     def format_for_csv(self) -> tuple:
         """
@@ -64,7 +84,7 @@ class Budget(object):
         csv_first_row = ["Your budget"]
         csv_second_row = ["Category:"]
         csv_third_row = ["Monthly Amounts:"]
-        csv_fourth_row =["Total income:", self.income]
+        csv_fourth_row =["Total income:", self.__income]
         for i in self.calculated_budget_map.keys():
             csv_second_row.append(i)
             csv_third_row.append(self.calculated_budget_map[i])
@@ -127,7 +147,7 @@ class Budget(object):
             self.calculated_budget_map[Budget.budget_categories[0]], 
             self.calculated_budget_map[Budget.budget_categories[1]], 
             self.calculated_budget_map[Budget.budget_categories[2]]
-            ) + "Total Income: {:,.2f}".format(self.income)
+            ) + "Total Income: {:,.2f}".format(self.__income)
     
     def __eq__(self, other) -> bool:
         """
@@ -141,7 +161,7 @@ class Budget(object):
         """
         if type(other) != Budget:
             return False
-        if self.income == other.income and self.budget_map == other.budget_map and self.calculated_budget_map == other.calculated_budget_map:
+        if self.__income == other.__income and self.budget_map == other.budget_map and self.calculated_budget_map == other.calculated_budget_map:
             return True
 
 if __name__ == '__main__':

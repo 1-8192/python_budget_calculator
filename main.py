@@ -50,6 +50,17 @@ def main():
     if evaluate_budget_bool == "y":
         print(" ".join(budget.evaluate_budget()))
 
+    recalculate_budget = input("Would you like re-allocate percentages to your budget categories?[y/n]: ")
+
+    while not yes_or_no_valid(recalculate_budget):
+        recalculate_budget = input("[y/n]?: ")
+
+    if recalculate_budget == "y":
+        category_and_percentages = confirm_category_percentages()
+        budget.amend_budget_calculations(category_and_percentages)
+        print("Here is your revised budget plan")
+        print(budget)
+
     # Giving the option to save the budget to a csv file
     print_csv_bool = input("Would you like generate a CSV file of your budget?[y/n]: ")
 
