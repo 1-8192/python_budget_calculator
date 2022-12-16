@@ -6,18 +6,24 @@ class Budget(object):
 
     Attributes
     ----------
-    income: float
-        peron's total income
+    income: float *private
+        person's total income
     budget_map: dict
         Person's budget category and percentage of total budget.
     calculated_budget_map: dict
         Persons's budget category and calculated monthly allowance.
-    Methods
+    Public Methods
     -------
     format_for_csv(self) -> tuple:
         returns a tuple of csv rows to print to a csv file
     evaluate_budget(self) -> set:
         returns a set of strings containing general advice for improving budget
+    amend_budget_calculations(self) -> None:
+        Amends budget calculations based on passed in budget_map.
+    get_income(self) -> float:
+        returns income attribute value
+    setincome(self, float) -> None:
+        Modified income attribute
     """
     
     # Class variable that allows us to access budget categories. Using a tuple since these should not change
@@ -163,6 +169,29 @@ class Budget(object):
             return False
         if self.__income == other.__income and self.budget_map == other.budget_map and self.calculated_budget_map == other.calculated_budget_map:
             return True
+    
+    def get_income(self) -> float:
+        """
+        getter method for private attribute
+  
+        Parameters:
+           self (Budget): class instance
+        Return:
+            float
+        """
+        return self.__income
+      
+    def set_income(self, income) -> None:
+        """
+        setter method for private attribute
+  
+        Parameters:
+           self (Budget): class instance
+           income (float): income number
+        Return:
+            None
+        """
+        self.__income = income
 
 if __name__ == '__main__':
     """ Unit testing some class methods below"""
@@ -223,6 +252,22 @@ if __name__ == '__main__':
         "Your monthly costs for rent/utilities etc. may be slightly high for your income level. Consider downsizing."
         }
     assert expected_set == evaluated_budget, "Did not get expcted advice, got: {}".format(evaluated_budget)
+
+    """Testing the amend_budget_calculations method"""
+    budget = Budget(1000)
+    budget_map = {
+        Budget.budget_categories[0]: 60,
+        Budget.budget_categories[1]: 5,
+        Budget.budget_categories[2]: 35,
+    }
+    expected_calculated_budget_map = {
+        Budget.budget_categories[0]: 600.0,
+        Budget.budget_categories[1]: 50.0,
+        Budget.budget_categories[2]: 350.0,
+    }
+    budget.amend_budget_calculations(budget_map)
+    assert budget.budget_map == budget_map
+    assert budget.calculated_budget_map == expected_calculated_budget_map
 
     """Testing the equals overwrite we implemented above"""
     budget_1 = Budget(100)

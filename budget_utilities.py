@@ -96,3 +96,18 @@ def confirm_category_percentages() -> dict:
             budget_map_dict[i] = float(percent)
     
     return budget_map_dict
+
+if __name__ == '__main__':
+    """ 
+    Unit testing some functions. Some of the functions require user interaction or file
+    printing, so we're not boothering setting up tests for those since we're not using
+    any dedicated testing libraries that might be better for it. 
+    """
+
+    """Testing is_valid_as_float function"""
+    assert True == is_valid_as_float('300')
+    assert False == is_valid_as_float('%^STAG')
+
+    """Testing yes_or_no_valid function"""
+    assert True == yes_or_no_valid("y")
+    assert False == yes_or_no_valid("What's up?")

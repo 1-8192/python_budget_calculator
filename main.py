@@ -50,6 +50,7 @@ def main():
     if evaluate_budget_bool == "y":
         print(" ".join(budget.evaluate_budget()))
 
+    # Giving the option to reallocate budget cateogires if the user desires 
     recalculate_budget = input("Would you like re-allocate percentages to your budget categories?[y/n]: ")
 
     while not yes_or_no_valid(recalculate_budget):
