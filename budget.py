@@ -14,8 +14,10 @@ class Budget(object):
         Persons's budget category and calculated monthly allowance.
     Methods
     -------
-    info(additional=""):
-        Prints the person's name and age.
+    format_for_csv(self) -> tuple:
+        returns a tuple of csv rows to print to a csv file
+    evaluate_budget(self) -> set:
+        returns a set of strings containing general advice for improving budget
     """
     
     # Class variable that allows us to access budget categories. Using a tuple since these should not change
@@ -60,8 +62,8 @@ class Budget(object):
             tuple with 4 elements, each a row to be saved to a CSV file
         """
         csv_first_row = ["Your budget"]
-        csv_second_row = ["category:"]
-        csv_third_row = ["monthly amounts:"]
+        csv_second_row = ["Category:"]
+        csv_third_row = ["Monthly Amounts:"]
         csv_fourth_row =["Total income:", self.income]
         for i in self.calculated_budget_map.keys():
             csv_second_row.append(i)
@@ -134,7 +136,6 @@ class Budget(object):
         Parameters:
            self (Budget): class instance
            other (Budget): class instance
-        
         Return:
             bool
         """
@@ -175,9 +176,9 @@ if __name__ == '__main__':
     csv_tuple = budget.format_for_csv()
     expected_tuple = (
         ["Your budget"],
-        ["necessities", "savings", "discretionary"],
-        [500.0, 200.0, 300.0],
-        ["Total income", 1000]
+        ["Category:", "necessities", "savings", "discretionary"],
+        ["Monthly Amounts:", 500.0, 200.0, 300.0],
+        ["Total income:", 1000]
     )
     assert expected_tuple == csv_tuple, "Did not get expcted csv rows, got: {}".format(csv_tuple)
 
