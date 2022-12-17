@@ -56,6 +56,7 @@ def print_csv(budget: Budget, file_name: str) -> None:
         Return:
             None
     """
+    # Opening with w here, so we can just overwrite an existing file if it exists.
     file = open(file_name + '.csv', 'w')
     content = budget.format_for_csv()
     try:

@@ -151,14 +151,14 @@ class Budget(object):
         Return:
             string
         """
-        return "Budget: \n" + "{:<2}     {:<2}     {:<2}\n".format(Budget.budget_categories[0], 
+        return "Budget: \n" + "{:<12}     {:<12}     {:<12}\n".format(Budget.budget_categories[0], 
         Budget.budget_categories[1], 
         Budget.budget_categories[2]
-        ) + "{:,.2f}          {:,.2f}        {:,.2f}\n".format(
+        ) + "{:<8,.2f}          {:^4,.2f}        {:>10,.2f}\n".format(
             self.calculated_budget_map[Budget.budget_categories[0]], 
             self.calculated_budget_map[Budget.budget_categories[1]], 
             self.calculated_budget_map[Budget.budget_categories[2]]
-            ) + "Total Income: {:,.2f}".format(self.__income)
+            ) + "Total Income: {:<10,.2f}".format(self.__income)
     
     def __eq__(self, other) -> bool:
         """
