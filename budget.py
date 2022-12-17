@@ -1,3 +1,6 @@
+"""
+Main Budget class for the app
+"""
 class Budget(object):
     """
     A class to represent someone's monthly budget.
@@ -36,7 +39,7 @@ class Budget(object):
   
         Parameters:
            income (float): A person's total monthly income
-           budget_map (dict):  A map of budget category to percentage of total budget.
+           budget_map (dict):  A map of budget category to percentage of total budget. *optional
 
         """
         # Attributes
@@ -79,7 +82,7 @@ class Budget(object):
     
     def format_for_csv(self) -> tuple:
         """
-        returns a tuple ready to be saved into a CSV file with budget information.
+        returns a tuple of lists ready to be saved into a CSV file with budget information.
   
         Parameters:
            self (Budget): class instance

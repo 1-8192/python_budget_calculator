@@ -1,5 +1,5 @@
 """
-Utility functions for the Python Budget Calculator
+Utility constants and functions for the Python Budget Calculator
 """
 from budget import Budget
 import csv
